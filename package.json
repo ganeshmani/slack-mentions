@@ -4,8 +4,14 @@
   "private": true,
   "dependencies": {
     "react": "^16.10.2",
+    "react-datepicker": "^2.9.6",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-mentions": "^3.3.0",
+    "react-scripts": "3.2.0",
+    "slate": "^0.47.8",
+    "slate-react": "^0.22.9",
+    "slate-suggestions": "^0.4.0",
+    "sugar": "^2.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
