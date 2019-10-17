@@ -3,6 +3,7 @@ import { MentionsInput, Mention } from 'react-mentions'
 import DatePicker from 'react-datepicker';
 import './mention-style.css'
 import { Date } from 'sugar';
+import getTaskName from './getTaskName';
 function MentionComponent() {
 
     const [state,setState] = useState({
@@ -88,7 +89,7 @@ function MentionComponent() {
           display: 'Walter White',
         },
         {
-          id: 'jesse',
+          id: 'ergh54dffjdkfj',
           display: 'Jesse Pinkman',
         },
         {
@@ -117,6 +118,21 @@ function MentionComponent() {
         }
       ]
 
+      let priority = [
+        {
+          id : "1234",
+          display : "High"
+        },
+        {
+          id : "12345",
+          display : "medium"
+        },
+        {
+          id : "12346",
+          display : "low"
+        },
+      ]
+
     const onChange = (e,newValue,newPlainTextValue,mentions) => {
         // e.preventDefault();
         setState({ value : newValue , mentionData : { newValue, newPlainTextValue, mentions} })    
@@ -130,8 +146,11 @@ function MentionComponent() {
             let values = newValue.match('[^~]+$');
             if(values){
                 let dateValue = Date.create(values[0]);
-
-                console.log(dateValue);
+                if(dateValue !== "Invalid Date"){
+                  console.log("Check ");
+                  console.log(dateValue);
+                }  
+                
             }
            
         }
@@ -141,8 +160,24 @@ function MentionComponent() {
         console.log("id",id);
     }
 
+    const onPrioirtyAdd = (id,display) => {
+      console.log("prioirty id",id);
+    }
+
     const handleDateChange = date => {
         setState({...state, startDate : date})
+    }
+
+    const onSubmit = e => {
+      console.log(e.keyCode);
+        if(e.key === 'Enter'){
+          e.preventDefault();
+      
+        
+          let val = getTaskName(state.value);
+  
+          console.log("output => ",val);
+        }
     }
 
     return (
@@ -152,6 +187,7 @@ function MentionComponent() {
            onChange={onChange}
            allowSuggestionsAboveCursor={true}
            allowSpaceInQuery={true}
+           onKeyUp={ onSubmit }
         //    style={style}
           style={{
             position: 'fixed',
@@ -170,9 +206,9 @@ function MentionComponent() {
                />
 
                <Mention 
-               trigger="/"
-               data={users}
-               onAdd={onAdd}
+               trigger="!"
+               data={priority}
+               onAdd={onPrioirtyAdd}
                className="mentions__mention"
                />
                {/* <DatePicker
